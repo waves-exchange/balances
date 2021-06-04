@@ -2,11 +2,8 @@ const path = require('path');
 
 const config = {
     entry: './src/index.ts',
-    node: {
-        global: false,
-        __filename: false,
-        __dirname: false,
-    },
+    target: 'web',
+    mode: 'production',
     module: {
         rules: [
             {
@@ -20,7 +17,7 @@ const config = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'index.js',
+        filename: 'indexW.js',
         path: path.resolve(__dirname, 'dist'),
     },
 };
@@ -31,6 +28,11 @@ const nodeConfig = {
     output: {
         filename: 'indexN.js',
         path: path.resolve(__dirname, 'dist'),
+    },
+    node: {
+        global: false,
+        __filename: false,
+        __dirname: false,
     },
 };
 

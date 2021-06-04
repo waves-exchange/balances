@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
     "lib": [
       "esnext"
     ],
-    "sourceMap": false,
-    "module": "commonjs",
-    "outDir": "dist",
-    "declaration": true,
-    "strict": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "CommonJS",
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "declaration": true
   },
   "include": [
     "./src/**/*"
