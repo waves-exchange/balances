@@ -1,6 +1,5 @@
 import { Money, Asset } from '@waves/data-entities';
 import { TMoneyInput } from '@waves/data-entities/dist/entities/Money';
-import { BigNumber } from '@waves/bignumber';
 
 
 

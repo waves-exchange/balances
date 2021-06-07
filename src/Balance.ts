@@ -52,6 +52,10 @@ export class Balance {
         this.changeUser(address);
     }
 
+    public getAssets(ids: Array<string>): Promise<Array<MyAsset>> {
+        return this._assets.getAssets(ids);
+    }
+
     public changeUser(address: string): void {
         this.hasData = false;
         this.address = address;
