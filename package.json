@@ -1,6 +1,6 @@
 {
   "name": "@waves/balances",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Get Waves Assets and Balances",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
