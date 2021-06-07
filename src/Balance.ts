@@ -34,6 +34,7 @@ export class Balance {
     _readyPromise: Promise<void>;
     _poll: Poll|null = null;
     _assets: Assets;
+    _updateBalancesMs: number;
 
     constructor(props: Props) {
         const {
@@ -43,16 +44,36 @@ export class Balance {
             nodeUrl = 'https://nodes.waves.exchange',
             updateBalancesMs = null
         } = props;
+        this._updateBalancesMs = updateBalancesMs;
         this._assets = new Assets(dataServicesUrl, iconUrl);
-        this.address = address;
         this.dataServicesUrl = dataServicesUrl;
         this.nodeUrl = nodeUrl;
 
-        if (updateBalancesMs) {
-            this._updateBalances(updateBalancesMs);
+        this.changeUser(address);
+    }
+
+    public changeUser(address: string): void {
+        this.hasData = false;
+        this.address = address;
+        this.balances = Object.create(null);
+        this.feeList = [];
+        this._readyPromise = null;
+        const emptyBalances = Object.entries(this.balances)
+            .reduce((acc, [key, money]) => {
+                acc[key] = money.cloneWithCoins(0);
+                return acc;
+            }, {} as Record<string, MyMoney>);
+        this._onUpdate(Object.create(null));
+        if (!address) {
+            return;
+        }
+
+        if (this._updateBalancesMs) {
+            this._updateBalances(this._updateBalancesMs);
         } else {
             this._readyPromise = this._init();
         }
+
     }
 
     public destroy(): void {

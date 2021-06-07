@@ -1,5 +1,6 @@
 import { Money, Asset } from '@waves/data-entities';
 import { TMoneyInput } from '@waves/data-entities/dist/entities/Money';
+import { BigNumber } from '@waves/bignumber';
 
 
 
@@ -52,8 +53,19 @@ export type ServiceAsset = {
 
 export class MyMoney extends Money {
     asset: MyAsset;
+
     constructor(coins: TMoneyInput, asset: MyAsset) {
         super(coins, asset);
+    }
+
+    cloneWithCoins(coins: TMoneyInput): MyMoney {
+        const money = super.cloneWithCoins(coins);
+        return new MyMoney(money.getCoins(), this.asset);
+    }
+
+    cloneWithTokens(tokens: TMoneyInput): MyMoney {
+        const money = super.cloneWithTokens(tokens);
+        return new MyMoney(money.getCoins(), this.asset);
     }
 }
 export const convertToExtendedAsset = (asset: ServiceAsset, iconApiUrl: string): MyAsset => {
